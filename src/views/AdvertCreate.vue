@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import Textarea from "primevue/textarea";
@@ -80,6 +81,7 @@ async function send(payload: CreateData) {
 
 <template>
     <div>
+        <LoadingIndicator v-if="loading" />
         <div v-if="createdId" class="success">
             <h1>Успех!</h1>
             <p>

@@ -2,6 +2,7 @@
 import Dropdown from "primevue/dropdown";
 import Paginator, { type PageState } from "primevue/paginator";
 import AdvertsTable from "@/components/AdvertsTable.vue";
+import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import { api } from "@/api";
 import { computed, ref, watch } from "vue";
 
@@ -77,6 +78,7 @@ function scrollUp() {
 
 <template>
     <div>
+        <LoadingIndicator v-if="loading" />
         <div ref="scrollTarget" class="head">
             <h1>Объявления</h1>
             <Dropdown v-model="selectedSort" :options="sort" optionLabel="name" class="dropdown" />

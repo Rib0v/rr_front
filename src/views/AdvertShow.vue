@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -34,6 +35,7 @@ async function getAdvert() {
 
 <template>
     <div>
+        <LoadingIndicator v-if="loading" />
         <div class="head">
             <template v-if="advert">
                 <div class="swiper-wrapper">
