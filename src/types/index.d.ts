@@ -18,3 +18,10 @@ type Query = {
     sort?: string;
     page?: number;
 };
+
+type CreateData = {
+    name: string;
+    description: string;
+    price: number;
+    photos: string[];
+};

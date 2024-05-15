@@ -49,7 +49,6 @@ async function getAdverts(query?: Query) {
         const response = await api.get("/adverts", { params });
         tableData.value = response.data?.data || [];
         total.value = response.data?.meta?.total || 0;
-        console.log(response.data);
     } catch (error) {
         fetchingError.value = true;
     }

@@ -21,11 +21,9 @@ async function getAdvert() {
     fetchingError.value = false;
 
     try {
-        // const params = query || {};
         const params = { fields: "descr,photos" };
         const response = await api.get(`/adverts/${id}`, { params });
         advert.value = response.data?.data || [];
-        console.log(response.data);
     } catch (error) {
         fetchingError.value = true;
     }
@@ -37,7 +35,6 @@ async function getAdvert() {
 <template>
     <div>
         <div class="head">
-            <!-- <img :src="advert?.photo" :alt="advert?.name" /> -->
             <template v-if="advert">
                 <div class="swiper-wrapper">
                     <Swiper
@@ -61,7 +58,6 @@ async function getAdvert() {
             </div>
         </div>
         <p class="description">{{ advert?.description }}</p>
-        <!-- <p>{{ advert }}</p> -->
     </div>
 </template>
 
@@ -78,7 +74,6 @@ async function getAdvert() {
 <style scoped lang="scss">
 .head {
     display: flex;
-    // grid-template-columns: 1fr 20rem;
     gap: 2rem;
     margin-bottom: 1rem;
     width: 100%;
