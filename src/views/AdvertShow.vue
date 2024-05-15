@@ -36,30 +36,34 @@ async function getAdvert() {
 <template>
     <div>
         <LoadingIndicator v-if="loading" />
-        <div class="head">
-            <template v-if="advert">
-                <div class="swiper-wrapper">
-                    <Swiper
-                        class="main-gallery"
-                        id="swp1"
-                        :spaceBetween="90"
-                        :navigation="true"
-                        :pagination="{ clickable: true }"
-                        :centeredSlidesBounds="true"
-                        :modules="[Navigation, Pagination]"
-                    >
-                        <SwiperSlide v-for="(item, index) in advert.photos" :key="index">
-                            <img :src="item" :alt="advert.name" />
-                        </SwiperSlide>
-                    </Swiper>
+        <p v-if="fetchingError">Не удалось загрузить данные. Проверьте подключение к сети и повторите попытку.</p>
+
+        <template v-if="!loading && !fetchingError">
+            <div class="head">
+                <template v-if="advert">
+                    <div class="swiper-wrapper">
+                        <Swiper
+                            class="main-gallery"
+                            id="swp1"
+                            :spaceBetween="90"
+                            :navigation="true"
+                            :pagination="{ clickable: true }"
+                            :centeredSlidesBounds="true"
+                            :modules="[Navigation, Pagination]"
+                        >
+                            <SwiperSlide v-for="(item, index) in advert.photos" :key="index">
+                                <img :src="item" :alt="advert.name" />
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>
+                </template>
+                <div class="right-wrapper">
+                    <h1>{{ advert?.name }}</h1>
+                    <h2>{{ advert?.price.toLocaleString("ru-RU") }} ₽</h2>
                 </div>
-            </template>
-            <div class="right-wrapper">
-                <h1>{{ advert?.name }}</h1>
-                <h2>{{ advert?.price.toLocaleString("ru-RU") }} ₽</h2>
             </div>
-        </div>
-        <p class="description">{{ advert?.description }}</p>
+            <p class="description">{{ advert?.description }}</p>
+        </template>
     </div>
 </template>
 

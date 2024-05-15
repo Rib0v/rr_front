@@ -79,35 +79,35 @@ function scrollUp() {
 <template>
     <div>
         <LoadingIndicator v-if="loading" />
-        <div ref="scrollTarget" class="head">
+        <template v-if="fetchingError">
             <h1>Объявления</h1>
-            <Dropdown v-model="selectedSort" :options="sort" optionLabel="name" class="dropdown" />
-        </div>
+            <p>Не удалось загрузить данные. Проверьте подключение к сети и повторите попытку.</p>
+        </template>
 
-        <div class="adverts">
-            <hr />
-            <template v-for="advert in tableData" :key="advert.id">
-                <AdvertsTable :advert="advert" />
+        <template v-if="!loading && !fetchingError">
+            <div ref="scrollTarget" class="head">
+                <h1>Объявления</h1>
+                <Dropdown v-model="selectedSort" :options="sort" optionLabel="name" class="dropdown" />
+            </div>
+
+            <div class="adverts">
                 <hr />
-            </template>
-        </div>
+                <template v-for="advert in tableData" :key="advert.id">
+                    <AdvertsTable :advert="advert" />
+                    <hr />
+                </template>
+            </div>
 
-        <Paginator
-            @page="changePage"
-            :rows="10"
-            :totalRecords="total"
-            v-model:first="firstRow"
-            class="paginator"
-        ></Paginator>
+            <Paginator
+                @page="changePage"
+                :rows="10"
+                :totalRecords="total"
+                v-model:first="firstRow"
+                class="paginator"
+            ></Paginator>
+        </template>
     </div>
 </template>
-
-<style>
-.date {
-    width: 10rem;
-    max-width: 10rem;
-}
-</style>
 
 <style scoped lang="scss">
 .head {
